@@ -12,4 +12,4 @@ class QuotesSpider(scrapy.Spider):
         }
         next_page_url = response.xpath("//*[@id='app']/main/div[2]/div[5]/a[4]").xpath("@href").extract_first()
         if next_page_url is not None:
-            yield scrapy.Request(next_page_url)
+            yield scrapy.Request(response.urljoin(next_page_url))
