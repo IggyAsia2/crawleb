@@ -62,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+# ITEM_PIPELINES = {
 #    "scrapy_quotes.pipelines.ScrapyQuotesPipeline": 300,
-#}
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -93,6 +93,6 @@ FEED_EXPORT_ENCODING = "utf-8"
 
 ITEM_PIPELINES = {
     'crawlab.CrawlabPipeline': 300,
-    'scrapy.pipelines.MyImagesPipeline': 300, 
+    "scrapy_quotes.imgPipe.MyImagesPipeline": 300,
 }
 IMAGES_STORE = '/imgdata/Manhwa'
