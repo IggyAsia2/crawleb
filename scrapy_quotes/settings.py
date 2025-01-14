@@ -93,6 +93,6 @@ FEED_EXPORT_ENCODING = "utf-8"
 
 ITEM_PIPELINES = {
     'crawlab.CrawlabPipeline': 300,
-    'crawlab.pipelines.MyImagesPipeline': 300, 
+    'scrapy.pipelines.MyImagesPipeline': 300, 
 }
 IMAGES_STORE = '/imgdata/Manhwa'
