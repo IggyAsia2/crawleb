@@ -7,9 +7,10 @@ class QuotesSpider(scrapy.Spider):
     start_urls = ['https://manhwa18.net/manga/runner-s-high/chap-01-1166']
 
     def parse(self, response):
-        yield {
-            'src': response.xpath("//*[@id='chapter-content']").css("img").xpath("@data-src").getall(),
-        }
+        img_url = response.xpath("//*[@id='chapter-content']").css("img").xpath("@data-src").getall()
+        for url in img_url:
+            yield {'url': url} 
+        
         next_page_url = response.xpath("//*[@id='app']/main/div[2]/div[5]/a[4]").xpath("@href").extract_first()
         if next_page_url is not None:
             yield scrapy.Request(response.urljoin(next_page_url))
