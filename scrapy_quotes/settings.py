@@ -95,4 +95,4 @@ ITEM_PIPELINES = {
     'crawlab.CrawlabPipeline': 300,
     "scrapy_quotes.imgPipe.MyImagesPipeline": 300,
 }
-IMAGES_STORE = '/imgdata/Manhwa'
+IMAGES_STORE = '/data/Manhwa'
