@@ -18,11 +18,10 @@ class QuotesSpider(scrapy.Spider):
     start_urls = ['https://gantzvn.com/truyen/gigant/chap-17}/']
 
     def parse(self, response):
-        count = 17
         img_url = response.css("div.reading-content").css("div > img").xpath("@data-src").getall()
         for url in img_url:
             yield {'url': url.strip()} 
-        next_page_url = f'https://gantzvn.com/truyen/gigant/chap-{count}/'
+        
+        next_page_url = response.css("div.nav-next > a").xpath("@href").extract_first()
         if next_page_url is not None:
-            count = count + 1
             yield scrapy.Request(response.urljoin(next_page_url))
