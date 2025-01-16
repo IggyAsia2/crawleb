@@ -3,14 +3,25 @@ import scrapy
 
 class QuotesSpider(scrapy.Spider):
     name = 'quotes'
-    allowed_domains = ['manhwa18.net']
-    start_urls = ['https://manhwa18.net/manga/runner-s-high/chap-01-1166']
+    allowed_domains = ['gantzvn.com']
+    # start_urls = ['https://manhwa18.net/manga/runner-s-high/chap-01-1166']
+
+    # def parse(self, response):
+    #     img_url = response.xpath("//*[@id='chapter-content']").css("img").xpath("@data-src").getall()
+    #     for url in img_url:
+    #         yield {'url': url} 
+        
+    #     next_page_url = response.xpath("//*[@id='app']/main/div[2]/div[5]/a[4]").xpath("@href").extract_first()
+    #     if next_page_url is not None:
+    #         yield scrapy.Request(response.urljoin(next_page_url))
+    
+    start_urls = ['https://gantzvn.com/truyen/gigant/chap-17/']
 
     def parse(self, response):
-        img_url = response.xpath("//*[@id='chapter-content']").css("img").xpath("@data-src").getall()
+        img_url = response.css("div.reading-content").css("div > img").xpath("@data-src").getall()
         for url in img_url:
-            yield {'url': url} 
+            yield {'url': url.strip()} 
         
-        next_page_url = response.xpath("//*[@id='app']/main/div[2]/div[5]/a[4]").xpath("@href").extract_first()
+        next_page_url = response.xpath("//*[@id='manga-reading-nav-foot']/div/div[2]/div/div[2]/a]").xpath("@href").extract_first()
         if next_page_url is not None:
             yield scrapy.Request(response.urljoin(next_page_url))
