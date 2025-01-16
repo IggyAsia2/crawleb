@@ -15,7 +15,7 @@ class QuotesSpider(scrapy.Spider):
     #     if next_page_url is not None:
     #         yield scrapy.Request(response.urljoin(next_page_url))
     
-    start_urls = ['https://gantzvn.com/truyen/gigant/chap-17}/']
+    start_urls = ['https://gantzvn.com/truyen/gigant/chap-17/']
 
     def parse(self, response):
         img_url = response.css("div.reading-content").css("div > img").xpath("@data-src").getall()
