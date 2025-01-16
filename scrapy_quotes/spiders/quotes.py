@@ -15,14 +15,13 @@ class QuotesSpider(scrapy.Spider):
     #     if next_page_url is not None:
     #         yield scrapy.Request(response.urljoin(next_page_url))
     
-    
     start_urls = ['https://gantzvn.com/truyen/gigant/chap-17}/']
 
     def parse(self, response):
+        count = 17
         img_url = response.css("div.reading-content").css("div > img").xpath("@data-src").getall()
         for url in img_url:
             yield {'url': url.strip()} 
-        count = 17
         next_page_url = f'https://gantzvn.com/truyen/gigant/chap-{count}/'
         if next_page_url is not None:
             count = count + 1
