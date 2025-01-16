@@ -23,6 +23,7 @@ class QuotesSpider(scrapy.Spider):
         for url in img_url:
             yield {'url': url.strip()} 
         count = 17
-        next_page_url = f'https://gantzvn.com/truyen/gigant/chap-{count+1}/'
+        next_page_url = f'https://gantzvn.com/truyen/gigant/chap-{count}/'
         if next_page_url is not None:
+            count = count + 1
             yield scrapy.Request(response.urljoin(next_page_url))
