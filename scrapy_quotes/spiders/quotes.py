@@ -3,7 +3,7 @@ import scrapy
 
 class QuotesSpider(scrapy.Spider):
     name = 'quotes'
-    allowed_domains = ['gantzvn.com']
+    allowed_domains = ['truyenqqto.com']
     # start_urls = ['https://manhwa18.net/manga/runner-s-high/chap-01-1166']
 
     # def parse(self, response):
@@ -15,13 +15,13 @@ class QuotesSpider(scrapy.Spider):
     #     if next_page_url is not None:
     #         yield scrapy.Request(response.urljoin(next_page_url))
     
-    start_urls = ['https://gantzvn.com/truyen/gigant/chap-17/']
+    start_urls = ['https://truyenqqto.com/truyen-tranh/phao-dai-cua-sach-khai-huyen-9250-chap-15.html']
 
     def parse(self, response):
-        img_url = response.css("div.reading-content").css("div > img").xpath("@data-src").getall()
+        img_url = response.css("div.page-chapter").css("img").xpath("@data-original").getall()
         for url in img_url:
-            yield {'url': url.strip()} 
+            yield {'url': url} 
         
-        next_page_url = response.css("div.nav-next > a").xpath("@href").extract_first()
+        next_page_url = response.css("div.chapter-control > div > a:nth-child(2)").xpath("@href").extract_first()
         if next_page_url is not None:
             yield scrapy.Request(response.urljoin(next_page_url))
