@@ -11,6 +11,7 @@ BOT_NAME = "scrapy_quotes"
 
 SPIDER_MODULES = ["scrapy_quotes.spiders"]
 NEWSPIDER_MODULE = "scrapy_quotes.spiders"
+RETRY_HTTP_CODES = [429]
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -50,9 +51,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "scrapy_quotes.middlewares.ScrapyQuotesDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    "scrapy.downloadermiddlewares.retry.RetryMiddleware": None,
+    "scrapy_quotes.middlewares.TooManyRequestsRetryMiddleware": 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
